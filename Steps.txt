@@ -1,0 +1,26 @@
+Problem Statement
+Get a list of employees who receive a salary less than 100, compared
+to their immediate employee with higher salary in the same unit
+
+SELECT *
+FROM Employee e
+where e.Sal<100 and e.Sal<
+(
+   SELECT Sal
+   from Employee
+   Group By Dept_id
+   Having Dept_id=e.Dept_id
+);
+
+List of all employees who draw higher salary than the average salary
+of that department
+
+SELECT * 
+FROM Employee e 
+WHERE e.Sal > 
+(
+  SELECT AVG(Sal) 
+  from Employee 
+  GROUP BY Dept_id
+  Having Dept_id = e.Dept_id 
+);
